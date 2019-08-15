@@ -1,5 +1,3 @@
-cd C:\Users\Administrator\Desktop\HealthCheck
-
 Netdom query FSMO > fsmo.txt
 
 dcdiag.exe /e /c /v /f:dcdiag.log
