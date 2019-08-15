@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>DSInternals</id>
+    <version>2.22</version>
+    <authors>Michael Grafnetter</authors>
+    <owners>DSInternals</owners>
+    <licenseUrl>https://raw.githubusercontent.com/MichaelGrafnetter/DSInternals/master/LICENSE.md</licenseUrl>
+    <projectUrl>https://www.dsinternals.com/en</projectUrl>
+    <iconUrl>https://www.dsinternals.com/wp-content/uploads/ad.png</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>The DSInternals PowerShell Module exposes several internal features of Active Directory.
+
+DISCLAIMER: Features exposed through this module are not supported by Microsoft and it is therefore not intended to be used in production environments. Improper use might cause irreversible damage to domain controllers or negatively impact domain security.</description>
+    <releaseNotes>- Added the Enable-ADDBAccount and Disable-ADDBAccount cmdlets.</releaseNotes>
+    <copyright>(c) 2015-2017 Michael Grafnetter. All rights reserved.</copyright>
+    <tags>ActiveDirectory Security PSModule</tags>
+  </metadata>
+</package>
