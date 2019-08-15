@@ -1,0 +1,449 @@
+
+Directory Server Diagnosis
+
+Performing initial setup:
+   Trying to find home server...
+   * Verifying that the local machine vuln-dc01, is a Directory Server. 
+   Home Server = vuln-dc01
+   * Connecting to directory service on server vuln-dc01.
+   * Identified AD Forest. 
+   Collecting AD specific global data 
+   * Collecting site info.
+   Calling ldap_search_init_page(hld,CN=Sites,CN=Configuration,DC=vuln,DC=lab,DC=local,LDAP_SCOPE_SUBTREE,(objectCategory=ntDSSiteSettings),.......
+   The previous call succeeded 
+   Iterating through the sites 
+   Looking at base site object: CN=NTDS Site Settings,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=vuln,DC=lab,DC=local
+   Getting ISTG and options for the site
+   * Identifying all servers.
+   Calling ldap_search_init_page(hld,CN=Sites,CN=Configuration,DC=vuln,DC=lab,DC=local,LDAP_SCOPE_SUBTREE,(objectClass=ntDSDsa),.......
+   The previous call succeeded....
+   The previous call succeeded
+   Iterating through the list of servers 
+   Getting information for the server CN=NTDS Settings,CN=VULN-DC01,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=vuln,DC=lab,DC=local 
+   objectGuid obtained
+   InvocationID obtained
+   dnsHostname obtained
+   site info obtained
+   All the info for the server collected
+   * Identifying all NC cross-refs.
+   * Found 1 DC(s). Testing 1 of them.
+   Done gathering initial info.
+
+Doing initial required tests
+   
+   Testing server: Default-First-Site-Name\VULN-DC01
+      Starting test: Connectivity
+         * Active Directory LDAP Services Check
+         Determining IP4 connectivity 
+         * Active Directory RPC Services Check
+         ......................... VULN-DC01 passed test Connectivity
+
+Doing primary tests
+   
+   Testing server: Default-First-Site-Name\VULN-DC01
+      Starting test: Advertising
+         The DC VULN-DC01 is advertising itself as a DC and having a DS.
+         The DC VULN-DC01 is advertising as an LDAP server
+         The DC VULN-DC01 is advertising as having a writeable directory
+         The DC VULN-DC01 is advertising as a Key Distribution Center
+         The DC VULN-DC01 is advertising as a time server
+         The DS VULN-DC01 is advertising as a GC.
+         ......................... VULN-DC01 passed test Advertising
+      Starting test: CheckSecurityError
+         * Dr Auth:  Beginning security errors check!
+         Found KDC VULN-DC01 for domain vuln.lab.local in site Default-First-Site-Name
+         Checking machine account for DC VULN-DC01 on DC VULN-DC01.
+         * SPN found :LDAP/vuln-dc01.vuln.lab.local/vuln.lab.local
+         * SPN found :LDAP/vuln-dc01.vuln.lab.local
+         * SPN found :LDAP/VULN-DC01
+         * SPN found :LDAP/vuln-dc01.vuln.lab.local/VULN
+         * SPN found :LDAP/399e2b89-de56-45d5-b2eb-529cfcb2985e._msdcs.vuln.lab.local
+         * SPN found :E3514235-4B06-11D1-AB04-00C04FC2DCD2/399e2b89-de56-45d5-b2eb-529cfcb2985e/vuln.lab.local
+         * SPN found :HOST/vuln-dc01.vuln.lab.local/vuln.lab.local
+         * SPN found :HOST/vuln-dc01.vuln.lab.local
+         * SPN found :HOST/VULN-DC01
+         * SPN found :HOST/vuln-dc01.vuln.lab.local/VULN
+         * SPN found :GC/vuln-dc01.vuln.lab.local/vuln.lab.local
+         [VULN-DC01] No security related replication errors were found on this
+         DC!  To target the connection to a specific source DC use
+         /ReplSource:<DC>.
+         ......................... VULN-DC01 passed test CheckSecurityError
+      Starting test: CutoffServers
+         * Configuration Topology Aliveness Check
+         * Analyzing the alive system replication topology for DC=DomainDnsZones,DC=vuln,DC=lab,DC=local.
+         * Performing upstream (of target) analysis.
+         * Performing downstream (of target) analysis.
+         * Analyzing the alive system replication topology for DC=ForestDnsZones,DC=vuln,DC=lab,DC=local.
+         * Performing upstream (of target) analysis.
+         * Performing downstream (of target) analysis.
+         * Analyzing the alive system replication topology for CN=Schema,CN=Configuration,DC=vuln,DC=lab,DC=local.
+         * Performing upstream (of target) analysis.
+         * Performing downstream (of target) analysis.
+         * Analyzing the alive system replication topology for CN=Configuration,DC=vuln,DC=lab,DC=local.
+         * Performing upstream (of target) analysis.
+         * Performing downstream (of target) analysis.
+         * Analyzing the alive system replication topology for DC=vuln,DC=lab,DC=local.
+         * Performing upstream (of target) analysis.
+         * Performing downstream (of target) analysis.
+         ......................... VULN-DC01 passed test CutoffServers
+      Starting test: FrsEvent
+         * The File Replication Service Event log test 
+         Skip the test because the server is running DFSR.
+         ......................... VULN-DC01 passed test FrsEvent
+      Starting test: DFSREvent
+         The DFS Replication Event Log. 
+         ......................... VULN-DC01 passed test DFSREvent
+      Starting test: SysVolCheck
+         * The File Replication Service SYSVOL ready test 
+         File Replication Service's SYSVOL is ready 
+         ......................... VULN-DC01 passed test SysVolCheck
+      Starting test: FrsSysVol
+         * The File Replication Service SYSVOL ready test 
+         File Replication Service's SYSVOL is ready 
+         ......................... VULN-DC01 passed test FrsSysVol
+      Starting test: KccEvent
+         * The KCC Event log test
+         Found no KCC errors in "Directory Service" Event log in the last 15 minutes.
+         ......................... VULN-DC01 passed test KccEvent
+      Starting test: KnowsOfRoleHolders
+         Role Schema Owner = CN=NTDS Settings,CN=VULN-DC01,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=vuln,DC=lab,DC=local
+         Role Domain Owner = CN=NTDS Settings,CN=VULN-DC01,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=vuln,DC=lab,DC=local
+         Role PDC Owner = CN=NTDS Settings,CN=VULN-DC01,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=vuln,DC=lab,DC=local
+         Role Rid Owner = CN=NTDS Settings,CN=VULN-DC01,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=vuln,DC=lab,DC=local
+         Role Infrastructure Update Owner = CN=NTDS Settings,CN=VULN-DC01,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=vuln,DC=lab,DC=local
+         ......................... VULN-DC01 passed test KnowsOfRoleHolders
+      Starting test: MachineAccount
+         Checking machine account for DC VULN-DC01 on DC VULN-DC01.
+         * SPN found :LDAP/vuln-dc01.vuln.lab.local/vuln.lab.local
+         * SPN found :LDAP/vuln-dc01.vuln.lab.local
+         * SPN found :LDAP/VULN-DC01
+         * SPN found :LDAP/vuln-dc01.vuln.lab.local/VULN
+         * SPN found :LDAP/399e2b89-de56-45d5-b2eb-529cfcb2985e._msdcs.vuln.lab.local
+         * SPN found :E3514235-4B06-11D1-AB04-00C04FC2DCD2/399e2b89-de56-45d5-b2eb-529cfcb2985e/vuln.lab.local
+         * SPN found :HOST/vuln-dc01.vuln.lab.local/vuln.lab.local
+         * SPN found :HOST/vuln-dc01.vuln.lab.local
+         * SPN found :HOST/VULN-DC01
+         * SPN found :HOST/vuln-dc01.vuln.lab.local/VULN
+         * SPN found :GC/vuln-dc01.vuln.lab.local/vuln.lab.local
+         ......................... VULN-DC01 passed test MachineAccount
+      Starting test: NCSecDesc
+         * Security Permissions check for all NC's on DC VULN-DC01.
+         * Security Permissions Check for
+           DC=DomainDnsZones,DC=vuln,DC=lab,DC=local
+            (NDNC,Version 3)
+         * Security Permissions Check for
+           DC=ForestDnsZones,DC=vuln,DC=lab,DC=local
+            (NDNC,Version 3)
+         * Security Permissions Check for
+           CN=Schema,CN=Configuration,DC=vuln,DC=lab,DC=local
+            (Schema,Version 3)
+         * Security Permissions Check for
+           CN=Configuration,DC=vuln,DC=lab,DC=local
+            (Configuration,Version 3)
+         * Security Permissions Check for
+           DC=vuln,DC=lab,DC=local
+            (Domain,Version 3)
+         ......................... VULN-DC01 passed test NCSecDesc
+      Starting test: NetLogons
+         * Network Logons Privileges Check
+         Verified share \\VULN-DC01\netlogon
+         Verified share \\VULN-DC01\sysvol
+         ......................... VULN-DC01 passed test NetLogons
+      Starting test: ObjectsReplicated
+         VULN-DC01 is in domain DC=vuln,DC=lab,DC=local
+         Checking for CN=VULN-DC01,OU=Domain Controllers,DC=vuln,DC=lab,DC=local in domain DC=vuln,DC=lab,DC=local on 1 servers
+            Object is up-to-date on all servers.
+         Checking for CN=NTDS Settings,CN=VULN-DC01,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=vuln,DC=lab,DC=local in domain CN=Configuration,DC=vuln,DC=lab,DC=local on 1 servers
+            Object is up-to-date on all servers.
+         ......................... VULN-DC01 passed test ObjectsReplicated
+      Starting test: OutboundSecureChannels
+         * The Outbound Secure Channels test
+         ** Did not run Outbound Secure Channels test because /testdomain: was
+         not entered
+         ......................... VULN-DC01 passed test OutboundSecureChannels
+      Starting test: Replications
+         * Replications Check
+         * Replication Latency Check
+         ......................... VULN-DC01 passed test Replications
+      Starting test: RidManager
+         * Available RID Pool for the Domain is 1601 to 1073741823
+         * vuln-dc01.vuln.lab.local is the RID Master
+         * DsBind with RID Master was successful
+         * rIDAllocationPool is 1101 to 1600
+         * rIDPreviousAllocationPool is 1101 to 1600
+         * rIDNextRID: 1174
+         ......................... VULN-DC01 passed test RidManager
+      Starting test: Services
+         * Checking Service: EventSystem
+         * Checking Service: RpcSs
+         * Checking Service: NTDS
+         * Checking Service: DnsCache
+         * Checking Service: DFSR
+         * Checking Service: IsmServ
+         * Checking Service: kdc
+         * Checking Service: SamSs
+         * Checking Service: LanmanServer
+         * Checking Service: LanmanWorkstation
+         * Checking Service: w32time
+         * Checking Service: NETLOGON
+         ......................... VULN-DC01 passed test Services
+      Starting test: SystemLog
+         * The System Event log test
+         A warning event occurred.  EventID: 0x80000434
+            Time Generated: 08/15/2019   07:34:45
+            Event String:
+            The reason supplied by user VULN\Administrator for the last unexpected shutdown of this computer is: Other (Unplanned)
+             Reason Code: 0xa000000
+             Problem ID: 
+             Bugcheck String: 
+             Comment: 
+            
+         Found no errors in "System" Event log in the last 60 minutes.
+         ......................... VULN-DC01 passed test SystemLog
+      Starting test: Topology
+         * Configuration Topology Integrity Check
+         * Analyzing the connection topology for DC=DomainDnsZones,DC=vuln,DC=lab,DC=local.
+         * Performing upstream (of target) analysis.
+         * Performing downstream (of target) analysis.
+         * Analyzing the connection topology for DC=ForestDnsZones,DC=vuln,DC=lab,DC=local.
+         * Performing upstream (of target) analysis.
+         * Performing downstream (of target) analysis.
+         * Analyzing the connection topology for CN=Schema,CN=Configuration,DC=vuln,DC=lab,DC=local.
+         * Performing upstream (of target) analysis.
+         * Performing downstream (of target) analysis.
+         * Analyzing the connection topology for CN=Configuration,DC=vuln,DC=lab,DC=local.
+         * Performing upstream (of target) analysis.
+         * Performing downstream (of target) analysis.
+         * Analyzing the connection topology for DC=vuln,DC=lab,DC=local.
+         * Performing upstream (of target) analysis.
+         * Performing downstream (of target) analysis.
+         ......................... VULN-DC01 passed test Topology
+      Starting test: VerifyEnterpriseReferences
+         ......................... VULN-DC01 passed test
+         VerifyEnterpriseReferences
+      Starting test: VerifyReferences
+         The system object reference (serverReference)
+         CN=VULN-DC01,OU=Domain Controllers,DC=vuln,DC=lab,DC=local and
+         backlink on
+         CN=VULN-DC01,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=vuln,DC=lab,DC=local
+         are correct. 
+         The system object reference (serverReferenceBL)
+         CN=VULN-DC01,CN=Topology,CN=Domain System Volume,CN=DFSR-GlobalSettings,CN=System,DC=vuln,DC=lab,DC=local
+         and backlink on
+         CN=NTDS Settings,CN=VULN-DC01,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=vuln,DC=lab,DC=local
+         are correct. 
+         The system object reference (msDFSR-ComputerReferenceBL)
+         CN=VULN-DC01,CN=Topology,CN=Domain System Volume,CN=DFSR-GlobalSettings,CN=System,DC=vuln,DC=lab,DC=local
+         and backlink on
+         CN=VULN-DC01,OU=Domain Controllers,DC=vuln,DC=lab,DC=local are
+         correct. 
+         ......................... VULN-DC01 passed test VerifyReferences
+      Starting test: VerifyReplicas
+         ......................... VULN-DC01 passed test VerifyReplicas
+   
+      Starting test: DNS
+         
+         DNS Tests are running and not hung. Please wait a few minutes...
+         See DNS test in enterprise tests section for results
+         ......................... VULN-DC01 passed test DNS
+   
+   Running partition tests on : DomainDnsZones
+      Starting test: CheckSDRefDom
+         ......................... DomainDnsZones passed test CheckSDRefDom
+      Starting test: CrossRefValidation
+         ......................... DomainDnsZones passed test
+         CrossRefValidation
+   
+   Running partition tests on : ForestDnsZones
+      Starting test: CheckSDRefDom
+         ......................... ForestDnsZones passed test CheckSDRefDom
+      Starting test: CrossRefValidation
+         ......................... ForestDnsZones passed test
+         CrossRefValidation
+   
+   Running partition tests on : Schema
+      Starting test: CheckSDRefDom
+         ......................... Schema passed test CheckSDRefDom
+      Starting test: CrossRefValidation
+         ......................... Schema passed test CrossRefValidation
+   
+   Running partition tests on : Configuration
+      Starting test: CheckSDRefDom
+         ......................... Configuration passed test CheckSDRefDom
+      Starting test: CrossRefValidation
+         ......................... Configuration passed test CrossRefValidation
+   
+   Running partition tests on : vuln
+      Starting test: CheckSDRefDom
+         ......................... vuln passed test CheckSDRefDom
+      Starting test: CrossRefValidation
+         ......................... vuln passed test CrossRefValidation
+   
+   Running enterprise tests on : vuln.lab.local
+      Starting test: DNS
+         Test results for domain controllers:
+            
+            DC: vuln-dc01.vuln.lab.local
+            Domain: vuln.lab.local
+            
+                  
+               TEST: Authentication (Auth)
+                  Authentication test: Successfully completed
+                  
+               TEST: Basic (Basc)
+                  The OS
+                  Microsoft Windows Server 2012 R2 Standard (Service Pack level: 0.0)
+                  is supported.
+                  NETLOGON service is running
+                  kdc service is running
+                  DNSCACHE service is running
+                  DNS service is running
+                  DC is a DNS server
+                  Network adapters information:
+                  Adapter
+                  [00000010] Intel(R) 82574L Gigabit Network Connection:
+                     MAC address is 00:50:56:AF:2A:30
+                     IP Address is static 
+                     IP address: 10.0.0.10, fe80::4916:1a0a:740f:99a
+                     DNS servers:
+                        127.0.0.1 (vuln-dc01.vuln.lab.local.) [Valid]
+                  The A host record(s) for this DC was found
+                  The SOA record for the Active Directory zone was found
+                  The Active Directory zone on this DC/DNS server was found primary
+                  Root zone on this DC/DNS server was not found
+                  
+               TEST: Forwarders/Root hints (Forw)
+                  Recursion is enabled
+                  Forwarders Information: 
+                     10.0.0.1 (<name unavailable>) [Invalid (unreachable)] 
+                     10.0.0.66 (<name unavailable>) [Invalid (unreachable)] 
+                     208.67.220.220 (<name unavailable>) [Valid] 
+                     208.67.222.222 (<name unavailable>) [Valid] 
+                  
+               TEST: Delegations (Del)
+                  Delegation information for the zone: vuln.lab.local.
+                     Delegated domain name: _msdcs.vuln.lab.local.
+                        DNS server: vuln-dc01.vuln.lab.local. IP:10.0.0.10 [Valid]
+                  
+               TEST: Dynamic update (Dyn)
+                  Test record dcdiag-test-record added successfully in zone vuln.lab.local
+                  Warning: Failed to delete the test record dcdiag-test-record in zone vuln.lab.local
+                  [Error details: 9505 (Type: Win32 - Description: Unsecured DNS packet.)]
+                  
+               TEST: Records registration (RReg)
+                  Network Adapter
+                  [00000010] Intel(R) 82574L Gigabit Network Connection:
+                     Matching CNAME record found at DNS server 10.0.0.10:
+                     399e2b89-de56-45d5-b2eb-529cfcb2985e._msdcs.vuln.lab.local
+
+                     Matching A record found at DNS server 10.0.0.10:
+                     vuln-dc01.vuln.lab.local
+
+                     Matching  SRV record found at DNS server 10.0.0.10:
+                     _ldap._tcp.vuln.lab.local
+
+                     Matching  SRV record found at DNS server 10.0.0.10:
+                     _ldap._tcp.0c1c5a81-bcfc-46a9-9be0-cb1f971d6b33.domains._msdcs.vuln.lab.local
+
+                     Matching  SRV record found at DNS server 10.0.0.10:
+                     _kerberos._tcp.dc._msdcs.vuln.lab.local
+
+                     Matching  SRV record found at DNS server 10.0.0.10:
+                     _ldap._tcp.dc._msdcs.vuln.lab.local
+
+                     Matching  SRV record found at DNS server 10.0.0.10:
+                     _kerberos._tcp.vuln.lab.local
+
+                     Matching  SRV record found at DNS server 10.0.0.10:
+                     _kerberos._udp.vuln.lab.local
+
+                     Matching  SRV record found at DNS server 10.0.0.10:
+                     _kpasswd._tcp.vuln.lab.local
+
+                     Matching  SRV record found at DNS server 10.0.0.10:
+                     _ldap._tcp.Default-First-Site-Name._sites.vuln.lab.local
+
+                     Matching  SRV record found at DNS server 10.0.0.10:
+                     _kerberos._tcp.Default-First-Site-Name._sites.dc._msdcs.vuln.lab.local
+
+                     Matching  SRV record found at DNS server 10.0.0.10:
+                     _ldap._tcp.Default-First-Site-Name._sites.dc._msdcs.vuln.lab.local
+
+                     Matching  SRV record found at DNS server 10.0.0.10:
+                     _kerberos._tcp.Default-First-Site-Name._sites.vuln.lab.local
+
+                     Matching  SRV record found at DNS server 10.0.0.10:
+                     _ldap._tcp.gc._msdcs.vuln.lab.local
+
+                     Matching A record found at DNS server 10.0.0.10:
+                     gc._msdcs.vuln.lab.local
+
+                     Matching  SRV record found at DNS server 10.0.0.10:
+                     _gc._tcp.Default-First-Site-Name._sites.vuln.lab.local
+
+                     Matching  SRV record found at DNS server 10.0.0.10:
+                     _ldap._tcp.Default-First-Site-Name._sites.gc._msdcs.vuln.lab.local
+
+                     Matching  SRV record found at DNS server 10.0.0.10:
+                     _ldap._tcp.pdc._msdcs.vuln.lab.local
+
+         
+         Summary of test results for DNS servers used by the above domain
+         controllers:
+         
+            DNS server: 10.0.0.1 (<name unavailable>)
+               1 test failure on this DNS server
+               PTR record query for the 1.0.0.127.in-addr.arpa. failed on the DNS server 10.0.0.1               [Error details: 1460 (Type: Win32 - Description: This operation returned because the timeout period expired.)]
+               
+            DNS server: 10.0.0.66 (<name unavailable>)
+               1 test failure on this DNS server
+               PTR record query for the 1.0.0.127.in-addr.arpa. failed on the DNS server 10.0.0.66               [Error details: 1460 (Type: Win32 - Description: This operation returned because the timeout period expired.)]
+               
+            DNS server: 10.0.0.10 (vuln-dc01.vuln.lab.local.)
+               All tests passed on this DNS server
+               Name resolution is functional._ldap._tcp SRV record for the forest root domain is registered 
+               DNS delegation for the domain  _msdcs.vuln.lab.local. is operational on IP 10.0.0.10
+
+               
+            DNS server: 208.67.220.220 (<name unavailable>)
+               All tests passed on this DNS server
+               
+            DNS server: 208.67.222.222 (<name unavailable>)
+               All tests passed on this DNS server
+               
+         Summary of DNS test results:
+         
+                                            Auth Basc Forw Del  Dyn  RReg Ext
+            _________________________________________________________________
+            Domain: vuln.lab.local
+               vuln-dc01                    PASS PASS PASS PASS WARN PASS n/a  
+         
+         ......................... vuln.lab.local passed test DNS
+      Starting test: LocatorCheck
+         GC Name: \\vuln-dc01.vuln.lab.local
+         Locator Flags: 0xe000f3fd
+         PDC Name: \\vuln-dc01.vuln.lab.local
+         Locator Flags: 0xe000f3fd
+         Time Server Name: \\vuln-dc01.vuln.lab.local
+         Locator Flags: 0xe000f3fd
+         Preferred Time Server Name: \\vuln-dc01.vuln.lab.local
+         Locator Flags: 0xe000f3fd
+         KDC Name: \\vuln-dc01.vuln.lab.local
+         Locator Flags: 0xe000f3fd
+         ......................... vuln.lab.local passed test LocatorCheck
+      Starting test: FsmoCheck
+         GC Name: \\vuln-dc01.vuln.lab.local
+         Locator Flags: 0xe000f3fd
+         PDC Name: \\vuln-dc01.vuln.lab.local
+         Locator Flags: 0xe000f3fd
+         Time Server Name: \\vuln-dc01.vuln.lab.local
+         Locator Flags: 0xe000f3fd
+         Preferred Time Server Name: \\vuln-dc01.vuln.lab.local
+         Locator Flags: 0xe000f3fd
+         KDC Name: \\vuln-dc01.vuln.lab.local
+         Locator Flags: 0xe000f3fd
+         ......................... vuln.lab.local passed test FsmoCheck
+      Starting test: Intersite
+         Skipping site Default-First-Site-Name, this site is outside the scope
+         provided by the command line arguments provided. 
+         ......................... vuln.lab.local passed test Intersite

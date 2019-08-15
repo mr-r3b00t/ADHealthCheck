@@ -1,0 +1,1 @@
+﻿ get-aduser -filter * -properties passwordlastset, passwordneverexpires | sort name | export-csv -Path password_info.csv -NoClobber -NoTypeInformation
